@@ -4,22 +4,13 @@
         <description><![CDATA[Your Name]]></description>
         <link>https://gordles.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Wed, 13 Dec 2023 04:14:02 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 13 Dec 2023 08:51:50 GMT</lastBuildDate>
         <atom:link href="https://gordles.io/feed.xml" rel="self" type="application/rss+xml"/>
-        <item>
-            <title><![CDATA[Markdown Examples]]></title>
-            <description><![CDATA[View examples of all possible Markdown options.]]></description>
-            <link>/posts/markdown</link>
-            <guid isPermaLink="true">/posts/markdown</guid>
-            <category><![CDATA[web development]]></category>
-            <dc:creator><![CDATA[You]]></dc:creator>
-            <pubDate>Fri, 19 Mar 2021 05:00:00 GMT</pubDate>
-        </item>
         <item>
             <title><![CDATA[Calvin - A Full-Stack Open-Source Google Calendar Assistant]]></title>
             <description><![CDATA[In-depth project rundown of a Langchain assistant that can manage your Google Calendar]]></description>
-            <link>/posts/pages</link>
-            <guid isPermaLink="true">/posts/pages</guid>
+            <link>/posts/calvin</link>
+            <guid isPermaLink="true">/posts/calvin</guid>
             <category><![CDATA[Langchain]]></category>
             <dc:creator><![CDATA[John Gordley]]></dc:creator>
             <pubDate>Tue, 12 Dec 2023 06:00:00 GMT</pubDate>
