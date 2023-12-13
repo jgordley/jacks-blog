@@ -1,6 +1,6 @@
 ---
 title: Calvin - A Full-Stack Open-Source Google Calendar Assistant
-date: 12/12/2023
+date: 2023/12/12
 description: In-depth project rundown of a Langchain assistant that can manage your Google Calendar
 tag: Langchain
 author: John Gordley
