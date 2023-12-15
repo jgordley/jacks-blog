@@ -1,12 +1,12 @@
 ---
-title: Calvin - A Full-Stack Open-Source Google Calendar Assistant
+title: Calvin - An Open-Source Google Calendar Assistant
 date: 2023/12/12
 description: In-depth project rundown of a Langchain assistant that can manage your Google Calendar
 tag: Langchain
 author: John Gordley
 ---
 
-# Calvin: A Full-Stack Open-Source Google Calendar Assistant
+# Calvin: An Open-Source Google Calendar Assistant
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ivGhV_OphxE?si=OOjko6S2fa2-TUy5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -28,6 +28,7 @@ author: John Gordley
 ## Introduction and Motivation
 <hr>
 Oh the dream of having your own personal assistant to valet you to work in the morning, take care of your coffee and food, and manage all your important meetings. While the all-encompassing dream of having every need tended to may be far-fetched for people like me, the dream of having an assistant to manage all aspects of your Google Calendar has very much become a reality for the common worker. With all the buzz around the latest tools made available by the OpenAI API and Langchain AI Agents, I decided to take a crack at a very practical application for my everyday life: my Google Calendar.
+<br>
 
 After a semester of Independent Study under [Dr. Ed Klein](https://www.linkedin.com/in/edkleinurl/) at Vanderbilt University in the MS in CS program, I've got a fully working, full-stack Google Calendar Assistant created with Next.js, FastAPI, and MongoDB. At this stage, the assistant can list your calendars, respond to questions about events on a selected calendar, and create new events for you. While there is still a lot of work to be done before this assistant can even come close to the [Donna Bot](https://www.youtube.com/watch?v=LAd2n-Fw7q4) (credit Suits), this project not only provides a foundational proof of concept for AI agents that can interact with the Google Calendar using a simple Google Auth sign in, but also an extendable tech stack to be used by others for other Langchain AI agent projects.
 
@@ -185,7 +186,7 @@ Creating this end to end application was a fantastic experience for me and I lea
 
 
 #### Vector-based Tool Retrieval
-In theory, one could add as many tool specifications as they wanted and give their agent [unlimited power](https://www.youtube.com/watch?v=SWwFogRQVnk). However, there is a limit on the amount of context you can send GPT-4 and other OpenAI models in the prompt, providing an eventual cap on the amount of tools you can expose. To combat this, a technique has been deviced called Vector-based tool retrieval. In this system, tool descriptions are converted to vectors using models like `text-embedding-ada-002` or `gte-large` and saved to a vector database such as [Weaviate](https://weaviate.io/). Then, before each call to GPT-4 by the langchain agent, the user's query is vectorized and a similarity search is performed to retrieve the `k` most similar tools to the user's query. These `k` tools are then fed to the model without exceeding the context window by feeding it every single tool available. More information on this technique can be found here on Langchain's website: [Custom Agent with Tool Retrieval](https://python.langchain.com/docs/modules/agents/how_to/custom_agent_with_tool_retrieval).
+In theory, one could add as many tool specifications as they wanted and give their agent [unlimited power](https://www.youtube.com/watch?v=SWwFogRQVnk). However, there is a limit on the amount of context you can send GPT-4 and other OpenAI models in the prompt, providing an eventual cap on the amount of tools you can expose. To combat this, a technique has been devised called Vector-based tool retrieval. In this system, tool descriptions are converted to vectors using models like `text-embedding-ada-002` or `gte-large` and saved to a vector database such as [Weaviate](https://weaviate.io/). Then, before each call to GPT-4 by the langchain agent, the user's query is vectorized and a similarity search is performed to retrieve the `k` most similar tools to the user's query. These `k` tools are then fed to the model without exceeding the context window by feeding it every single tool available. More information on this technique can be found here on Langchain's website: [Custom Agent with Tool Retrieval](https://python.langchain.com/docs/modules/agents/how_to/custom_agent_with_tool_retrieval).
 
 #### New and Improved Tools
 I have several ideas for cool tools that could integrate well with the Google Calendar assistant. Creating a tool that could crawl [espn.com](https://www.espn.com) for upcoming sporting events that the user is interested in could be interesting. The same thing could be possible with upcoming show or movie release dates. There are also obvious tool improvements that are core to the functionality such as allowing the agent to reschedule events and invite users by email to events that it creates. 
