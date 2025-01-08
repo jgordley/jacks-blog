@@ -1,21 +1,13 @@
 ---
-title: Calvin - An Open-Source Google Calendar Assistant
-date: 2023/12/12
-description: In-depth project rundown of a Langchain assistant that can manage your Google Calendar
-tag: Langchain
-author: John Gordley
+title: "Calvin - An Open-Source Google Calendar Assistant"
+date: "2023-12-12"
+excerpt: "In-depth project rundown of a Langchain assistant that can manage your Google Calendar"
+tags: ["langchain", "nextjs", "ai", "project"]
 ---
 
 # Calvin: An Open-Source Google Calendar Assistant
 
-import Image from 'next/image'
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ivGhV_OphxE?si=OOjko6S2fa2-TUy5" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-
-<div style={{display: 'inline-flex', alignItems: 'center'}}>
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> 
-  <a href="https://github.com/jgordley/GoogleCalendarAssistant" style={{textDecoration: 'none', marginLeft: '5px'}}>Google Calendar Assistant Project Link</a>
-</div>
+[View Project on GitHub](https://github.com/jgordley/GoogleCalendarAssistant)
 
 ## Table of Contents
 
@@ -36,27 +28,15 @@ After a semester of Independent Study under [Dr. Ed Klein](https://www.linkedin.
 
 As mentioned previously, the full tech stack for this project is Next.js frontend for the chat interface, FastAPI backend for the AI agent logic and OpenAI API calls, and a MongoDB database for storing user information. NextAuth is used for Google Authentication and a Google Cloud Project was set up to manage application permissions such as requesting the user's permission to access and modify calendar events. The architecture design diagram is shown below.
 
-<Image
-  src="/images/calvin/CalendarAssistantV2.png"
-  alt="ArchitectureDiagram"
-  width={800}
-  height={600}
-  priority
-/>
+![Architecture Diagram](/images/calvin/CalendarAssistantV2.png)
 
-As you can see above, a simple frontend UI is sketched out on the left that demonstrates some example queries that I wanted my application to have. The Authentication is all managed by Google Auth and user info such as their Google API access token, email, and account creation date are stored in a MongoDB database. The core logic revolves around calls to GPT-4 and Langchain Tool specifications that give GPT-4 information about the actions it can take to respond to a user. Once the user sends a message to the application, it is handed to a Langchain agent that calls GPT-4 to basically ask what action to take and with which parameters. That function call is then executed and the resulting output is then fed back into GPT-4 to be cleaned up for a nice response that the user can understand. For more information about function calling, see this great article from OpenAI: [https://openai.com/blog/function-calling-and-other-api-updates](https://openai.com/blog/function-calling-and-other-api-updates). 
+As you can see above, a simple frontend UI is sketched out on the left that demonstrates some example queries that I wanted my application to have. The Authentication is all managed by Google Auth and user info such as their Google API access token, email, and account creation date are stored in a MongoDB database. The core logic revolves around calls to GPT-4 and Langchain Tool specifications that give GPT-4 information about the actions it can take to respond to a user. Once the user sends a message to the application, it is handed to a Langchain agent that calls GPT-4 to basically ask what action to take and with which parameters. That function call is then executed and the resulting output is then fed back into GPT-4 to be cleaned up for a nice response that the user can understand. For more information about function calling, see this great article from OpenAI: [https://openai.com/blog/function-calling-and-other-api-updates](https://openai.com/blog/function-calling-and-other-api-updates).
 
 ## Google Auth and API Setup
 
 To incorporate Google Auth into my application, I used [NextAuth's Google Integration](https://next-auth.js.org/providers/google). With a few lines, you can specify a callback to Google's Auth API and receive a user token that includes access to different APIs based on your specification. In this case, the only API that was needed was the Google Calendar API and access to read/write calendars and events. You can see the default permission screen for the application below.
 
-<Image
-  src="/images/calvin/sign-in-with-google.png"
-  alt="SignInPermissions"
-  width={800}
-  height={600}
-  priority
-/>
+![Sign In Permissions](/images/calvin/sign-in-with-google.png)
 
 There are also several configuration steps that were taken in the Google Cloud Console. I had to create a project, specify an 0Auth consent screen, and add site URLs that would be allowed to issue a Google Login, such as my `localhost` and eventually my DigitalOcean hosted URL. For more info on setting up the Google Cloud Console with NextAuth, there's a great tutorial by Chinedu Imoh on [How to Implement Google Authentication in a Next.js App Using NextAuth](https://www.telerik.com/blogs/how-to-implement-google-authentication-nextjs-app-using-nextauth).
 
@@ -64,13 +44,7 @@ There are also several configuration steps that were taken in the Google Cloud C
 
 Now for the interesting piece, the Langchain Agent that incorporates GPT-4. The design methodology of this agent is relatively simple. Provide a detailed list of functions that the agent can execute and descriptions for when they would be used, what inputs they have, and the functions themselves. In Langchain, this function specification is called a `BaseTool`. When the Langchain agent executes, it passes a formatted list of the `Tools` available to GPT-4, which then responds with what function to call given the query, along with the inputs to the function. The Langchain agent will then execute the function and pass the response back to GPT-4, who will consolidate the output into a final answer to be presented to the user. An example chain execution is shown below:
 
-<Image
-  src="/images/calvin/langchain_logic.png"
-  alt="LangchainLogic"
-  width={800}
-  height={600}
-  priority
-/>
+![Langchain Logic](/images/calvin/langchain_logic.png)
 
 In this example, you can see the logs show `Invoking: get_calendar_events with...` which indicates that GPT-4 decided to go with the `GetCalendarEventsTool`. These tool specifications are done by defining a function to be called and a Tool with additional input descriptions and information to help GPT-4 make a decision on which function to call. Here is the `GetCalendarEventsTool` specification as an example:
 
@@ -134,43 +108,25 @@ As you can see, it is relatively simple to provide a Google Calendar search tool
 
 ## Results
 
-The current state as of this blog post is that the user can log in with their Google account and ask questions about upcoming events on their calendar as well as create new events on their calendar simply by using natural language. The application is quite powerful given its simplicity and the scope of the project and I am very pleased with how this proof of concept turned out. If anything, this project serves as an example for others who wish to create chatbot assistants that can aid them in calling APIs or performing mundane tasks. 
+The current state as of this blog post is that the user can log in with their Google account and ask questions about upcoming events on their calendar as well as create new events on their calendar simply by using natural language. The application is quite powerful given its simplicity and the scope of the project and I am very pleased with how this proof of concept turned out. If anything, this project serves as an example for others who wish to create chatbot assistants that can aid them in calling APIs or performing mundane tasks.
 
-There are still many improvements to be made that are discussed further down in this article. Many of the main drawbacks are the latency of the bot which is currently very slow due to the OpenAI GPT-4 endpoint latency (it increases greatly when using GPT-3.5-turbo at the expense of bot accuracy) and the bot "hallucinating" from time to time and missing events in certain questions. 
+There are still many improvements to be made that are discussed further down in this article. Many of the main drawbacks are the latency of the bot which is currently very slow due to the OpenAI GPT-4 endpoint latency (it increases greatly when using GPT-3.5-turbo at the expense of bot accuracy) and the bot "hallucinating" from time to time and missing events in certain questions.
 
 Below are some screenshots of conversations that I thought were helpful and interesting.
 
 ### Creating an Event
 
-<Image
-  src="/images/calvin/create-lunch.png"
-  alt="CreateLunch"
-  width={800}
-  height={600}
-  priority
-/>
+![Create Lunch](/images/calvin/create-lunch.png)
 
-<p style={{textAlign: 'center'}}>Simple request to create an event</p>
+Simple request to create an event
 
-<Image
-  src="/images/calvin/created-by-calvin.png"
-  alt="CreateByCalvin"
-  width={800}
-  height={600}
-  priority
-/>
+![Created by Calvin](/images/calvin/created-by-calvin.png)
 
-<p style={{textAlign: 'center'}}>Event created in Google Calendar with the "created with Calvin" watermark</p>
+Event created in Google Calendar with the "created with Calvin" watermark
 
-<Image
-  src="/images/calvin/time-conflict.png"
-  alt="TimeConflict"
-  width={800}
-  height={600}
-  priority
-/>
+![Time Conflict](/images/calvin/time-conflict.png)
 
-<p style={{textAlign: 'center'}}>Time conflict being recognized by the bot</p>
+Time conflict being recognized by the bot
 
 ## Lessons Learned and Future Work
 
@@ -182,11 +138,11 @@ In theory, one could add as many tool specifications as they wanted and give the
 
 ### New and Improved Tools
 
-I have several ideas for cool tools that could integrate well with the Google Calendar assistant. Creating a tool that could crawl [espn.com](https://www.espn.com) for upcoming sporting events that the user is interested in could be interesting. The same thing could be possible with upcoming show or movie release dates. There are also obvious tool improvements that are core to the functionality such as allowing the agent to reschedule events and invite users by email to events that it creates. 
+I have several ideas for cool tools that could integrate well with the Google Calendar assistant. Creating a tool that could crawl [espn.com](https://www.espn.com) for upcoming sporting events that the user is interested in could be interesting. The same thing could be possible with upcoming show or movie release dates. There are also obvious tool improvements that are core to the functionality such as allowing the agent to reschedule events and invite users by email to events that it creates.
 
 ### Frontend Improvements
 
-With a calendar application, it is important that the user does not lose events or incorrectly schedule events such as an important client meeting. To assist in this, it could be nice to show a small info card with the event information after one has been created, or give the user a chance to confirm or deny that the event is tentatively scheduled correctly. In the case of deleting an event, it would be nice to give the user the power to confirm that an event that the agent has chosen for deletion is correct. 
+With a calendar application, it is important that the user does not lose events or incorrectly schedule events such as an important client meeting. To assist in this, it could be nice to show a small info card with the event information after one has been created, or give the user a chance to confirm or deny that the event is tentatively scheduled correctly. In the case of deleting an event, it would be nice to give the user the power to confirm that an event that the agent has chosen for deletion is correct.
 
 ## Acknowledgements
 
