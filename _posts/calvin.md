@@ -2,7 +2,7 @@
 title: "Calvin - An Open-Source Google Calendar Assistant"
 date: "2023-12-12"
 excerpt: "In-depth project rundown of a Langchain assistant that can manage your Google Calendar"
-tags: ["langchain", "nextjs", "ai", "project"]
+tags: ["langchain", "agents"]
 ---
 
 # Calvin: An Open-Source Google Calendar Assistant
