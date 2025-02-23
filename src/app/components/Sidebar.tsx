@@ -21,7 +21,7 @@ const EmailIcon = () => (
 
 export default function Sidebar() {
   return (
-    <aside className="lg:w-64 lg:pr-8">
+    <aside className="w-full lg:w-64 lg:pr-8">
       {/* Mobile header */}
       <div className="lg:hidden flex items-center space-x-4 mb-6 p-4">
         <Image

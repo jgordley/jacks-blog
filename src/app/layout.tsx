@@ -20,11 +20,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-white text-gray-900`}>
         <GoogleAnalytics />
-        <div className="min-h-screen">
-          <div className="max-w-6xl mx-auto px-4 py-8">
-            <div className="flex flex-col lg:flex-row gap-8">
+        <div className="min-h-screen w-full">
+          <div className="w-full max-w-6xl mx-auto px-4 py-8">
+            <div className="flex flex-col lg:flex-row gap-8 w-full">
               <Sidebar />
-              <main className="flex-1">
+              <main className="flex-1 w-full">
                 {children}
               </main>
             </div>
