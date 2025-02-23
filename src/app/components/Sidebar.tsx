@@ -21,20 +21,35 @@ const EmailIcon = () => (
 
 export default function Sidebar() {
   return (
-    <aside className="w-64 pr-8">
-      <div className="mb-6">
+    <aside className="lg:w-64 lg:pr-8">
+      {/* Mobile header */}
+      <div className="lg:hidden flex items-center space-x-4 mb-6 p-4">
         <Image
           src="/profile.png"
           alt="Jack Gordley"
-          width={150}
-          height={150}
+          width={50}
+          height={50}
           className="rounded-full"
         />
+        <h2 className="text-xl font-bold">Jack Gordley</h2>
       </div>
 
-      <h2 className="text-2xl font-bold mb-2">Jack Gordley</h2>
+      {/* Desktop layout */}
+      <div className="hidden lg:block">
+        <div className="mb-6">
+          <Image
+            src="/profile.png"
+            alt="Jack Gordley"
+            width={150}
+            height={150}
+            className="rounded-full"
+          />
+        </div>
 
-      <div className="text-gray-600 mb-4 space-y-2">
+        <h2 className="text-2xl font-bold mb-2">Jack Gordley</h2>
+      </div>
+
+      <div className="text-gray-600 mb-4 space-y-2 px-4 lg:px-0">
         <p>
           Software Engineer at{' '}
           <a 
@@ -60,33 +75,33 @@ export default function Sidebar() {
         </p>
       </div>
 
-      <div>
+      <div className="px-4 lg:px-0">
         <h3 className="text-lg font-semibold mb-2">Contact</h3>
-        <ul className="space-y-2">
-          <li>
+        <ul className="flex flex-row lg:flex-col items-center lg:items-start gap-4 lg:gap-2">
+          <li className="flex items-center">
             <a 
               href="mailto:jgordley99@gmail.com" 
-              className="text-blue-600 hover:underline"
+              className="text-blue-600 hover:underline flex items-center"
             >
               <EmailIcon /> Email
             </a>
           </li>
-          <li>
+          <li className="flex items-center">
             <a 
               href="https://github.com/jgordley" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="text-blue-600 hover:underline"
+              className="text-blue-600 hover:underline flex items-center"
             >
               <GithubIcon /> GitHub
             </a>
           </li>
-          <li>
+          <li className="flex items-center">
             <a 
               href="https://twitter.com/jackgordley" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="text-blue-600 hover:underline"
+              className="text-blue-600 hover:underline flex items-center"
             >
               <TwitterIcon /> Twitter
             </a>
