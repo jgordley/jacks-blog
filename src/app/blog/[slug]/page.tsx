@@ -24,7 +24,7 @@ export default async function Page({ params }: Props) {
     const post = await getPostBySlug(slug);
 
     return (
-      <div>
+      <div className="w-full overflow-hidden">
         <Link 
           href="/" 
           className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-8"
@@ -45,12 +45,12 @@ export default async function Page({ params }: Props) {
           Back to Posts
         </Link>
 
-        <article className="prose prose-lg max-w-none">
+        <article className="prose prose-lg max-w-none overflow-hidden">
           <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
           <div className="text-gray-600 mb-8">
             {new Date(post.date).toLocaleDateString()}
           </div>
-          <div className="prose prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-700 prose-a:text-blue-600 prose-strong:font-bold prose-ul:list-disc prose-ol:list-decimal">
+          <div className="prose prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-700 prose-a:text-blue-600 prose-strong:font-bold prose-ul:list-disc prose-ol:list-decimal prose-img:max-w-full prose-img:w-full">
             <ReactMarkdown>{post.content}</ReactMarkdown>
           </div>
         </article>

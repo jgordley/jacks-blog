@@ -21,9 +21,9 @@ const EmailIcon = () => (
 
 export default function Sidebar() {
   return (
-    <aside className="w-full lg:w-64 lg:pr-8">
+    <div className="w-full px-4 py-8 lg:pr-8">
       {/* Mobile header */}
-      <div className="lg:hidden flex items-center space-x-4 mb-6 p-4">
+      <div className="lg:hidden flex items-center space-x-4 mb-6">
         <Image
           src="/profile.png"
           alt="Jack Gordley"
@@ -49,7 +49,7 @@ export default function Sidebar() {
         <h2 className="text-2xl font-bold mb-2">Jack Gordley</h2>
       </div>
 
-      <div className="text-gray-600 mb-4 space-y-2 px-4 lg:px-0">
+      <div className="text-gray-600 mb-4 space-y-2">
         <p>
           Software Engineer at{' '}
           <a 
@@ -75,7 +75,7 @@ export default function Sidebar() {
         </p>
       </div>
 
-      <div className="px-4 lg:px-0">
+      <div>
         <h3 className="text-lg font-semibold mb-2">Contact</h3>
         <ul className="flex flex-row lg:flex-col items-center lg:items-start gap-4 lg:gap-2">
           <li className="flex items-center">
@@ -108,7 +108,7 @@ export default function Sidebar() {
           </li>
         </ul>
       </div>
-    </aside>
+    </div>
   )
 }
 
