@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { use } from 'react';
 
 type Props = {
   params: Promise<{ slug: string }>

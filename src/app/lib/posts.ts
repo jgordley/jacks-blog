@@ -26,6 +26,7 @@ export async function getPostBySlug(slug: string): Promise<Post> {
       excerpt: data.excerpt || content.slice(0, 150) + '...'
     }
   } catch (error) {
+    console.error(`Failed to load post: ${slug}`, error)
     throw new Error(`Failed to load post: ${slug}`)
   }
 }
