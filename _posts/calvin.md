@@ -2,11 +2,10 @@
 title: "Calvin - An Open-Source Google Calendar Assistant"
 date: "2023-12-12"
 excerpt: "In-depth project rundown of a Langchain assistant that can manage your Google Calendar"
-tags: ["langchain", "agents"]
+tags: ["agents", "langchain"]
 ---
 
-# Calvin: An Open-Source Google Calendar Assistant
-
+![Calvin Screenshot](/images/calvin/calvin_screenshot.png)
 [View Project on GitHub](https://github.com/jgordley/GoogleCalendarAssistant)
 
 ## Table of Contents
